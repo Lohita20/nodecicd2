@@ -34,6 +34,6 @@ steps:
 - task: AzureRmWebAppDeployment@4
   displayName: 'Deploy Azure App Service'
   inputs:
-    azureSubscription: '$(Parameters.ConnectedServiceName)'
-    appType: '$(Parameters.WebAppKind)'
-    WebAppName: '$(Parameters.WebAppName)'
+    azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
+    appType: 'Web App on Windows'
+    WebAppName: 'nodecicddevops'
