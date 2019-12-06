@@ -27,16 +27,12 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
 
-#Your build pipeline references an undefined variable named ‘Parameters.ConnectedServiceName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Parameters.WebAppKind’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-#Your build pipeline references an undefined variable named ‘Parameters.WebAppName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
-
 - task: AzureRmWebAppDeployment@4
   displayName: 'Deploy Azure App Service'
   inputs:
     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
     # appType: '$(Parameters.WebAppKind)'
     WebAppName: nodecicddevops
-    packageForWindows: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/drop/63.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/drop/63.zip'
     WebConfigParameters: '-Handler iisnode -NodeStartFile app.js -appType node'
     
