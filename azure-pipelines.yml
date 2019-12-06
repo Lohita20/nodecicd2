@@ -33,6 +33,6 @@ steps:
     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
     # appType: '$(Parameters.WebAppKind)'
     WebAppName: nodecicddevops
-    packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/drop/63.zip'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/#/2375062/drop/63.zip'
     WebConfigParameters: '-Handler iisnode -NodeStartFile app.js -appType node'
     
