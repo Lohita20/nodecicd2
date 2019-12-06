@@ -1,0 +1,39 @@
+pool:
+#   name: 'Azure Pipelines'
+  vmImage: 'windows-2019'
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 6.x'
+  inputs:
+    checkLatest: true
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: 'mil-express-starter-master'
+    verbose: false
+
+- task: ArchiveFiles@2
+  displayName: 'Archive mil-express-starter-master'
+  inputs:
+    rootFolderOrFile: 'mil-express-starter-master'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: artifact'
+  inputs:
+    SourceFolder: 'mil-express-starter-master'
+    TargetFolder: artifact
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
+#Your build pipeline references an undefined variable named ‘Parameters.ConnectedServiceName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘Parameters.WebAppKind’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+#Your build pipeline references an undefined variable named ‘Parameters.WebAppName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Deploy Azure App Service'
+  inputs:
+    azureSubscription: '$(Parameters.ConnectedServiceName)'
+    appType: '$(Parameters.WebAppKind)'
+    WebAppName: '$(Parameters.WebAppName)'
