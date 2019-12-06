@@ -36,8 +36,9 @@ steps:
 #Your build pipeline references an undefined variable named ‘Parameters.WebAppName’. Create or edit the build pipeline for this YAML file, define the variable on the Variables tab. See https://go.microsoft.com/fwlink/?linkid=865972
 
 - task: AzureRmWebAppDeployment@4
-  displayName: 'Deploy Azure App Service'
+  displayName: 'Azure App Service Deploy: Nodecicd'
   inputs:
-    azureSubscription: '$(Parameters.ConnectedServiceName)'
-    appType: '$(Parameters.WebAppKind)'
-    WebAppName: '$(Parameters.WebAppName)'
+    azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
+    WebAppName: nodecicddevops
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+    # WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
