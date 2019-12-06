@@ -52,4 +52,5 @@ steps:
     # appType: '$(Parameters.WebAppKind)'
     WebAppName: nodecicddevops
     packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/drop/63.zip'
+    WebConfigParameters: '-Handler iisnode -NodeStartFile app.js -appType node'
     
