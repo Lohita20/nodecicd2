@@ -1,0 +1,30 @@
+pool:
+  name: Azure Pipelines
+  vmimagename: 'windows-2019'
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 6.x'
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: 'mil-express-starter-master'
+    verbose: false
+
+- task: ArchiveFiles@2
+  displayName: 'Archive $(Build.BinariesDirectory)'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: artifact'
+  inputs:
+    SourceFolder: '$(agent.builddirectory)'
+    TargetFolder: artifact
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
+- task: AzureRmWebAppDeployment@4
+  displayName: 'Azure App Service Deploy: nodecicddevops'
+  inputs:
+    azureSubscription: 'Visual Studio Enterprise – MPN(4170ffee-a940-479b-988c-50f869a6b94d)'
+    WebAppName: nodecicddevops
