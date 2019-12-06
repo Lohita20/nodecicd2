@@ -27,13 +27,49 @@ steps:
 - task: PublishBuildArtifacts@1
   displayName: 'Publish Artifact: drop'
 
+  pool:
+  name: Default
+steps:
+- task: NodeTool@0
+  displayName: 'Use Node 6.x'
+  inputs:
+    checkLatest: true
+
+- task: Npm@1
+  displayName: 'npm install'
+  inputs:
+    workingDir: 'mil-express-starter-master'
+    verbose: false
+
+- task: ArchiveFiles@2
+  displayName: 'Archive mil-express-starter-master'
+  inputs:
+    rootFolderOrFile: 'mil-express-starter-master'
+
+- task: CopyFiles@2
+  displayName: 'Copy Files to: artifact'
+  inputs:
+    SourceFolder: 'mil-express-starter-master'
+    TargetFolder: artifact
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+
 - task: AzureRmWebAppDeployment@4
-  displayName: 'Deploy Azure App Service'
+  displayName: 'Azure App Service Deploy: asd'
   inputs:
     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
-    # appType: '$(Parameters.WebAppKind)'
     WebAppName: nodecicddevops
-    # packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/#/2375062/drop/63.zip'
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    WebConfigParameters: '-Handler iisnode -NodeStartFile app.js -appType node'
+
+
+# - task: AzureRmWebAppDeployment@4
+#   displayName: 'Deploy Azure App Service'
+#   inputs:
+#     azureSubscription: 'Visual Studio Enterprise – MPN (4170ffee-a940-479b-988c-50f869a6b94d)'
+#     # appType: '$(Parameters.WebAppKind)'
+#     WebAppName: nodecicddevops
+#     # packageForLinux: '$(System.DefaultWorkingDirectory)/_Lohita20.nodecicd2/#/2375062/drop/63.zip'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+#     WebConfigParameters: '-Handler iisnode -NodeStartFile app.js -appType node'
     
