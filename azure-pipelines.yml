@@ -42,3 +42,9 @@ steps:
     WebAppName: nodecicddevops
     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
     # WebConfigParameters: '-Handler iisnode -NodeStartFile server.js -appType node'
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: '$(Parameters.ConnectedServiceName)'
+#     appType: '$(Parameters.WebAppKind)'
+#     WebAppName: '$(Parameters.WebAppName)'
